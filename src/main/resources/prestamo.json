@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Prestamo",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "object",
+            "properties": {
+                "usuarioId": {
+                    "type": "integer"
+                },
+                "libroId": {
+                    "type": "integer"
+                }
+            },
+            "required": ["usuarioId", "libroId"]
+        },
+        "usuario": {
+            "$ref": "user_schema.json"
+        },
+        "libro": {
+            "$ref": "book_schema.json"
+        },
+        "fechaPrestamo": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha en la que se realizó el préstamo."
+        },
+        "fechaDevolucion": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha en la que se debe devolver el libro."
+        },
+        "_links": {
+            "type": "object",
+            "properties": {
+                "self": {
+                    "type": "object",
+                    "properties": {
+                        "href": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Enlace al recurso del préstamo."
+                        }
+                    },
+                    "required": ["href"]
+                }
+            },
+            "required": ["self"]
+        }
+    },
+    "required": ["id", "usuario", "libro", "fechaPrestamo", "fechaDevolucion", "_links"]
+}

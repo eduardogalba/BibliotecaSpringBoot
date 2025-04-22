@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Usuario",
+    "type": "object",
+    "properties": {
+        "nombre": {
+            "title": "Nombre completo",
+            "description": "Nombre y apellidos del usuario.",
+            "type": "string",
+	    "maxLength": 50
+        },
+        "matricula": {
+            "title": "Matrícula",
+            "description": "Matrícula del alumno. Puede estar vacía.",
+            "type": "string",
+            "pattern": "^[A-Z][0-9]{6}$",
+	    "maxLength": 7
+        },
+        "nacimiento": {
+            "title": "Fecha de nacimiento",
+            "description": "Fecha de nacimiento del usuario.",
+            "type": "string",
+            "format": "date"
+        },
+        "correo": {
+            "title": "Correo electrónico",
+            "description": "Correo electrónico institucional (fi.upm.es o alumnos.upm.es).",
+            "type": "string",
+            "pattern": "^[a-zA-Z]+\\.[a-zA-Z]+(\\.[a-zA-Z]+)?@(alumnos|fi)\\.upm\\.es$",
+	    "maxLength": 50
+	}
+    },
+    "required": ["nombre", "nacimiento", "correo"]
+}
