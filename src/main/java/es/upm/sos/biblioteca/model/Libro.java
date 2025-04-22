@@ -44,7 +44,7 @@ public class Libro extends RepresentationModel<Libro> {
 	@Column(name = "isbn")
 	@Schema(description = "ISBN del libro", required = true, example = "978-8415618713")
 	@NotNull(message = "El isbn es obligatorio y no puede ser null")
-	@Size(min = 10, max = 13, message = "El isbn debe tener entre 10 y 13 caracteres")
+	@Size(min = 10, max = 17, message = "El isbn debe tener entre 10 y 17 caracteres")
 	private String isbn;
 
 	@Column(name = "editorial")
