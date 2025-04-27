@@ -29,9 +29,9 @@ INSERT INTO prestamo (usuarioId, libroId, fechaPrestamo, fechaDevolucion) VALUES
 ON CONFLICT DO NOTHING;
 
 -- Actualizar libros prestados
-UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-3-16-148410-0' ON CONFLICT DO NOTHING;
-UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-84-376-0494-7' ON CONFLICT DO NOTHING;
-UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-0-452-28423-4' ON CONFLICT DO NOTHING;
+UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-3-16-148410-0';
+UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-84-376-0494-7';
+UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-0-452-28423-4';
 
 -- Insertar histórico de préstamos
 INSERT INTO historico_prestamo (usuarioId, tituloLibro, isbnLibro, fechaPrestamo, fechaDevolucion, devuelto) VALUES
