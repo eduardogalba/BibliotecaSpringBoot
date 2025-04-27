@@ -139,7 +139,7 @@ public class UsuariosController {
 
     @PostMapping(value = "/{id}/libros", consumes = { "application/json" })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> addUsuarioToLibro(@PathVariable Integer id,
+    public ResponseEntity<Void> addLibroToUsuario(@PathVariable Integer id,
             @RequestBody PrestamoId nuevoPrestamo) {
         // Buscar libro y usuario en la base de datos
         Usuario usuario = usuarioService.buscarPorId(id)
@@ -149,13 +149,13 @@ public class UsuariosController {
                 .orElseThrow(() -> new LibroNotFoundException(
                         nuevoPrestamo.getLibroId()));
         prestamoService.prestarLibroAUsuario(nuevoPrestamo, libro, usuario);
-        return ResponseEntity.created(linkTo(LibrosController.class).slash(id).slash("usuarios")
-                .slash(usuario.getUsuarioId()).toUri()).build();
+        return ResponseEntity.created(linkTo(UsuariosController.class).slash(id).slash("usuarios")
+                .slash(libro.getLibroId()).toUri()).build();
     }
 
     @PutMapping("/{id}/libros/{libroId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> updateUsuarioToLibro(@PathVariable Integer id, @PathVariable Integer libroId) {
+    public ResponseEntity<Void> updateLibroToUsuario(@PathVariable Integer id, @PathVariable Integer libroId) {
         if (!usuarioService.existeUsuarioPorId(id)) {
             throw new LibroNotFoundException(id);
         } else if (!libroService.existeLibroPorId(libroId)) {
@@ -173,7 +173,7 @@ public class UsuariosController {
 
     @DeleteMapping("/{id}/libros/{libroId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> removeUsuarioToLibro(@PathVariable Integer id, @PathVariable Integer libroId) {
+    public ResponseEntity<Void> removeLibroToUsuario(@PathVariable Integer id, @PathVariable Integer libroId) {
         if (!usuarioService.existeUsuarioPorId(id)) {
             throw new LibroNotFoundException(id);
         } else if (!libroService.existeLibroPorId(libroId)) {
