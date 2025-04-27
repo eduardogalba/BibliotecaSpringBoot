@@ -3,7 +3,7 @@ CREATE TABLE  IF NOT EXISTS usuario (
     nombre VARCHAR(50) NOT NULL,
     matricula VARCHAR(7),
     nacimiento DATE NOT NULL,
-    correo VARCHAR(50) NOT NULL
+    correo VARCHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE  IF NOT EXISTS libro (
@@ -11,7 +11,7 @@ CREATE TABLE  IF NOT EXISTS libro (
     titulo TEXT NOT NULL, 
     autores TEXT NOT NULL,
     edicion TEXT NOT NULL,
-    isbn VARCHAR(20) NOT NULL,
+    isbn VARCHAR(20) UNIQUE NOT NULL,
     editorial TEXT NOT NULL,
     volumenes INT NOT NULL,
     prestados INT NOT NULL DEFAULT 0

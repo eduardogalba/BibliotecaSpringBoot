@@ -21,21 +21,3 @@ INSERT INTO libro (titulo, autores, edicion, isbn, editorial, volumenes, prestad
 ('Fahrenheit 451', 'Ray Bradbury', '4ta', '978-0-7432-4722-1', 'Ballantine Books', 2, 0)
 ON CONFLICT DO NOTHING;
 
--- Insertar préstamos
-INSERT INTO prestamo (usuarioId, libroId, fechaPrestamo, fechaDevolucion) VALUES
-(1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '14 days'),
-(2, 2, TIMESTAMP '2025-03-14 00:00:00', TIMESTAMP '2025-03-14 00:00:00' + INTERVAL '14 days'),
-(3, 3, TIMESTAMP '2025-03-09 00:00:00', TIMESTAMP '2025-03-09 00:00:00' + INTERVAL '14 days')
-ON CONFLICT DO NOTHING;
-
--- Actualizar libros prestados
-UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-3-16-148410-0';
-UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-84-376-0494-7';
-UPDATE libro SET prestados = prestados + 1 WHERE isbn = '978-0-452-28423-4';
-
--- Insertar histórico de préstamos
-INSERT INTO historico_prestamo (usuarioId, tituloLibro, isbnLibro, fechaPrestamo, fechaDevolucion, devuelto) VALUES
-(1, 'El Quijote', '978-3-16-148410-0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '14 days', FALSE),
-(2, 'Cien Años de Soledad', '978-84-376-0494-7', TIMESTAMP '2025-03-14 00:00:00', TIMESTAMP '2025-03-14 00:00:00' + INTERVAL '14 days', FALSE),
-(3, '1984', '978-0-452-28423-4', TIMESTAMP '2025-03-09 00:00:00', TIMESTAMP '2025-03-09 00:00:00' + INTERVAL '14 days', FALSE)
-ON CONFLICT DO NOTHING;
