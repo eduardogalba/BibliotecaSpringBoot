@@ -20,7 +20,12 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, PrestamoId> 
     List<Prestamo> findByLibroLibroId(int libroId);
     
     // Buscar todos los préstamos de un usuario específico
-    List<Prestamo> findByUsuarioUsuarioId(int usuarioId, Sort sort);
+    @Query(value = "SELECT * FROM prestamo WHERE usuarioId = :usuarioId", nativeQuery = true)
+    List<Prestamo> findPrestamosUsuario(int usuarioId);
+
+    // Buscar todos los préstamos de un usuario específico
+    @Query(value = "SELECT * FROM prestamo WHERE usuarioId = :usuarioId ORDER BY fechaPrestamo ASC", nativeQuery = true)
+    List<Prestamo> findPrestamosUsuarioPorFechaPrestamo(int usuarioId);
 
     // Actualizar la fecha de devolución de un préstamo
     @Modifying

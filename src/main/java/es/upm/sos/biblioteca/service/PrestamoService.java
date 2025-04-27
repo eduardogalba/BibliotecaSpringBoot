@@ -40,12 +40,11 @@ public class PrestamoService {
     }
 
     public List<Prestamo> buscarPorUsuarioId(int id) {
-        return repository.findByUsuarioUsuarioId(id, Sort.unsorted());
+        return repository.findPrestamosUsuario(id);
     }
 
     public List<Prestamo> buscarPorUsuarioIdOrdFechPrestamo(int id) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "fechaPrestamo");
-        return repository.findByUsuarioUsuarioId(id, sort);
+        return repository.findPrestamosUsuarioPorFechaPrestamo(id);
     }
 
     public Page<Historico> buscarHistoricoDevuelto(int usuarioId, int page, int size) {
@@ -142,7 +141,7 @@ public class PrestamoService {
                 usuariosSancionados.remove(usuario);
             }
         } else {
-            List<Prestamo> prestamos = repository.findByUsuarioUsuarioId(usuario.getUsuarioId(), Sort.unsorted());
+            List<Prestamo> prestamos = repository.findPrestamosUsuario(usuario.getUsuarioId());
             for (Prestamo prestamo : prestamos) {
                 if (fueraPlazo(prestamo.getFechaDevolucion())) {
                     usuariosSancionados.put(usuario, LocalDateTime.now().plusDays(7));

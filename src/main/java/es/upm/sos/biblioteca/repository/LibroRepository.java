@@ -16,9 +16,13 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
     // Buscar si existe por ISBN
     Optional<Libro> findByIsbn(String isbn);
 
-    Page<Libro> findByTituloContaining(String titulo, Pageable pageable);
+    @Query(value = "SELECT * FROM libro ORDER BY libroId ASC", nativeQuery = true)
+    Page<Libro> findAllOrdered(Pageable pageable);
 
-    @Query(value = "SELECT * FROM libro WHERE volumenes > prestados", nativeQuery = true)
+    @Query(value = "SELECT * FROM libro WHERE titulo LIKE %:titulo% ORDER BY libroId ASC", nativeQuery = true)
+    Page<Libro> findByTituloContainingOrdered(String titulo, Pageable pageable);
+
+    @Query(value = "SELECT * FROM libro WHERE volumenes > prestados ORDER BY libroId ASC", nativeQuery = true)
     Page<Libro> findLibrosDisponibles(Pageable pageable);    
 
     @Query(value = "SELECT COUNT(*) FROM libro WHERE volumenes > prestados", nativeQuery = true)

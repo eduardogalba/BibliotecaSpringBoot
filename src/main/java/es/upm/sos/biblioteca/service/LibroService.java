@@ -41,11 +41,11 @@ public class LibroService {
         // el que se ordena (name,desc)
         Pageable paginable = PageRequest.of(page, size);
         if (!pattern.isEmpty()) {
-            return repository.findByTituloContaining(pattern, paginable);
+            return repository.findByTituloContainingOrdered(pattern, paginable);
         } else if (disponible){
             return repository.findLibrosDisponibles(paginable);
         } else {
-            return repository.findAll(paginable);
+            return repository.findAllOrdered(paginable);
         }
     }
 

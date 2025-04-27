@@ -26,7 +26,7 @@ public interface HistoricoRepository extends JpaRepository<Historico, Integer> {
     @Query(value = "UPDATE historico_prestamo SET fechaDevolucion = CURRENT_TIMESTAMP WHERE usuarioId = :usuarioId", nativeQuery = true)
     void updateFechaDevolucion(int usuarioId);
 
-    @Query(value = "SELECT * FROM historico_prestamo WHERE usuarioId = :usuarioId AND devuelto = :devuelto", nativeQuery = true)
+    @Query(value = "SELECT * FROM historico_prestamo WHERE usuarioId = :usuarioId AND devuelto = :devuelto ORDER BY fechaDevolucion ASC", nativeQuery = true)
     Page<Historico> findByUsuarioIdAndDevuelto(int usuarioId, boolean devuelto, Pageable pageable);
     
 

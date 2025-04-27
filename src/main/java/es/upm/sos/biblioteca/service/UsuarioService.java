@@ -21,8 +21,8 @@ public class UsuarioService {
         return repository.existsById(id);
     }
 
-    public boolean existeUsuario(String nombre) {
-        return repository.existsByNombre(nombre);
+    public boolean existeUsuario(String correo) {
+        return repository.existsByCorreo(correo);
     }
 
     public Usuario crearUsuario(Usuario usuario) {
@@ -37,7 +37,7 @@ public class UsuarioService {
         // Crear el objeto Pageable usando el número de página, el tamaño y el campo por
         // el que se ordena (name,desc)
         Pageable paginable = PageRequest.of(page, size);
-        return repository.findAll(paginable);
+        return repository.findAllOrdered(paginable);
     }
 
     public void eliminarUsuario(int id) {
