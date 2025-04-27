@@ -149,7 +149,7 @@ public class UsuariosController {
                 .orElseThrow(() -> new LibroNotFoundException(
                         nuevoPrestamo.getLibroId()));
         prestamoService.prestarLibroAUsuario(nuevoPrestamo, libro, usuario);
-        return ResponseEntity.created(linkTo(UsuariosController.class).slash(id).slash("usuarios")
+        return ResponseEntity.created(linkTo(UsuariosController.class).slash(id).slash("libros")
                 .slash(libro.getLibroId()).toUri()).build();
     }
 
