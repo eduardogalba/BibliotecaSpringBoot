@@ -78,7 +78,7 @@ public class UsuariosController {
     @PostMapping(value = "", consumes = { "application/json" })
     public ResponseEntity<Void> nuevoUsuario(@Valid @RequestBody Usuario nuevoUsuario) {
         // Comprobamos si existe el usuario
-        if (!usuarioService.existeUsuario(nuevoUsuario.getNombre())) {
+        if (!usuarioService.existeUsuario(nuevoUsuario.getCorreo())) {
             // Si no existe lo guardamos en la base de datos
             Usuario usuario = usuarioService.crearUsuario(nuevoUsuario);
             // Añadimos la cabecera Location con la referencia el nuevo recurso
