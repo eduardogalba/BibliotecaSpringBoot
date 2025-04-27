@@ -13,12 +13,6 @@ public class LibroNotFoundAdvice {
     return new ErrorMessage(ex.getMessage());
   }
 
-  @ExceptionHandler(LibroNotAllowedException.class)
-  @ResponseStatus(HttpStatus.CONFLICT)
-  ErrorMessage userNotAllowedHandler(LibroNotAllowedException ex) {
-    return new ErrorMessage(ex.getMessage());
-  }
-
   @ExceptionHandler(LibroExistsException.class)
   @ResponseStatus(HttpStatus.CONFLICT)
   ErrorMessage userExistsHandler(LibroExistsException ex) {

@@ -18,12 +18,6 @@ public class UsuarioExceptionAdvice {
     return new ErrorMessage(ex.getMessage());
   }
 
-  @ExceptionHandler(UsuarioNotAllowedException.class)
-  @ResponseStatus(HttpStatus.CONFLICT)
-  ErrorMessage userNotAllowedHandler(UsuarioNotAllowedException ex) {
-    return new ErrorMessage(ex.getMessage());
-  }
-
   @ExceptionHandler(UsuarioExistsException.class)
   @ResponseStatus(HttpStatus.CONFLICT)
   ErrorMessage userExistsHandler(UsuarioExistsException ex) {

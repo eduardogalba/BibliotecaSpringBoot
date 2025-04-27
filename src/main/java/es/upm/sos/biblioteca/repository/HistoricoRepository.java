@@ -12,10 +12,9 @@ import es.upm.sos.biblioteca.model.Historico;
 import jakarta.transaction.Transactional;
 
 public interface HistoricoRepository extends JpaRepository<Historico, Integer> {
-    // Buscar todos los libros donde trabaja un empleado específico
+    
     List<Historico> findByUsuarioId(int usuarioId);
 
-    // Actualizar la fecha de devolución de un préstamo
     @Modifying
     @Transactional
     @Query(value = "UPDATE historico_prestamo SET fechaDevolucion = CURRENT_TIMESTAMP, devuelto = TRUE WHERE usuarioId = :usuarioId AND isbnLibro = :isbn", nativeQuery = true)

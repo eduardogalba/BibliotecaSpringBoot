@@ -87,7 +87,7 @@ public class UsuariosController {
         }
         // Si existe lanzamos una excepción que se captura en la clase
         // UsuarioExceptionAdvice y envía la respuesta con el código 409 - CONFLICT
-        throw new UsuarioExistsException(nuevoUsuario.getNombre());
+        throw new UsuarioExistsException(nuevoUsuario.getCorreo());
 
     }
 
