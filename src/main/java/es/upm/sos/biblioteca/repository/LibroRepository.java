@@ -25,8 +25,8 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
     @Query(value = "SELECT * FROM libro WHERE volumenes > prestados ORDER BY libroId ASC", nativeQuery = true)
     Page<Libro> findLibrosDisponibles(Pageable pageable);    
 
-    @Query(value = "SELECT COUNT(*) FROM libro WHERE volumenes > prestados", nativeQuery = true)
-    Optional<Integer> librosDisponibles();
+    @Query(value = "SELECT COUNT(*) FROM libro WHERE libroId = :libroId AND volumenes > prestados", nativeQuery = true)
+    Optional<Integer> librosDisponibles(int libroId);
 
     @Transactional
     @Modifying

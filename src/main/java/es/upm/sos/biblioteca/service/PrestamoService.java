@@ -35,6 +35,10 @@ public class PrestamoService {
 
     private Map<Usuario, LocalDateTime> usuariosSancionados = new HashMap<>();
 
+    public boolean existePrestamoPorId(PrestamoId geId) {
+        return repository.existsById(geId);
+    }
+
     public List<Prestamo> buscarPorLibroId(int id) {
         return repository.findByLibroLibroId(id);
     }
@@ -67,7 +71,7 @@ public class PrestamoService {
 
         verificarEstadoUsuario(usuario);
 
-        Optional<Integer> librosDisponibles = libroRepository.librosDisponibles();
+        Optional<Integer> librosDisponibles = libroRepository.librosDisponibles(libro.getLibroId());
         if (librosDisponibles.isEmpty() || librosDisponibles.get() == 0) {
             throw new NoLibrosDisponiblesException();
         }
