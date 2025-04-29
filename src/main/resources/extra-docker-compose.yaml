@@ -1,0 +1,41 @@
+version: "3.8"  
+services:
+  biblioteca:
+    build: .
+    container_name: biblioteca
+    ports:
+      - 8080:8080
+    networks:
+      - biblioteca-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/biblioteca
+      SPRING_DATASOURCE_USERNAME: visitor
+      SPRING_DATASOURCE_PASSWORD: 12345
+  postgres:  
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5432
+    networks:
+      - biblioteca-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    environment:
+      POSTGRES_USER: visitor
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: biblioteca
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./src/main/resources:/docker-entrypoint-initdb.d:ro
+networks:
+  biblioteca-net: 
+volumes:
+  pg-data:
