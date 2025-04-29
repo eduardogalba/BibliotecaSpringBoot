@@ -7,6 +7,7 @@ import org.springframework.hateoas.RepresentationModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 @Entity
@@ -17,6 +18,7 @@ import lombok.*;
 public class Prestamo extends RepresentationModel<Prestamo> {
 
     @EmbeddedId // Indica PrestamoId es la clave primaria de esta entidad
+    @Valid
     private PrestamoId id;
 
     @ManyToOne // Cada instancia Prestamo va a tener un usuario

@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 public class PrestamoId {
     @NotNull(message = "Es necesario el id del usuario")
     @Column(name = "usuarioId")
-    private int usuarioId;
+    private Integer usuarioId;
 
     @NotNull(message = "Es necesario el id del libro")
     @Column(name = "libroId")
-    private int libroId;
+    private Integer libroId;
 }

@@ -147,7 +147,7 @@ public class UsuariosController {
     @PostMapping(value = "/{id}/libros", consumes = { "application/json" })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> addLibroToUsuario(@PathVariable Integer id,
-            @RequestBody PrestamoId nuevoPrestamo) {
+        @Valid @RequestBody PrestamoId nuevoPrestamo) {
         // Buscar libro y usuario en la base de datos
         Usuario usuario = usuarioService.buscarPorId(id)
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
