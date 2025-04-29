@@ -243,6 +243,10 @@ public class UsuariosController {
             @RequestParam(defaultValue = "0", required = true) int page,
             @RequestParam(defaultValue = "2", required = true) int size) {
 
+        if (!usuarioService.existeUsuarioPorId(id)) {
+            throw new UsuarioNotFoundException(id);
+        }
+
         LocalDateTime startDateDT = parseDate(startDate);
         LocalDateTime endDateDT = parseDate(endDate);
 
@@ -296,7 +300,7 @@ public class UsuariosController {
         } catch (DateTimeParseException e) {
 
         }
-        
+
         throw new IllegalArgumentException(
                 "El formato de la fecha debe ser uno de los siguientes: dd/MM/yyyy, dd/MM/yyyy HH:mm:ss, o ISO_DATE_TIME (yyyy-MM-dd'T'HH:mm:ss)");
     }
