@@ -157,14 +157,14 @@ public class UsuariosController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> updateLibroToUsuario(@PathVariable Integer id, @PathVariable Integer libroId) {
         if (!usuarioService.existeUsuarioPorId(id)) {
-            throw new LibroNotFoundException(id);
+            throw new UsuarioNotFoundException(id);
         } else if (!libroService.existeLibroPorId(libroId)) {
-            throw new UsuarioNotFoundException(libroId);
+            throw new LibroNotFoundException(libroId);
         }
 
         PrestamoId presId = new PrestamoId();
-        presId.setLibroId(id);
-        presId.setUsuarioId(libroId);
+        presId.setUsuarioId(id);
+        presId.setLibroId(libroId);
         prestamoService.buscarPorId(presId)
                 .orElseThrow(() -> new PrestamoNotFoundException(id, libroId));
         prestamoService.ampliarPlazo(presId);
