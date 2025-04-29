@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.upm.sos.biblioteca.assembler.UsuarioModelAssembler;
 import es.upm.sos.biblioteca.exceptions.LibroNotFoundException;
+import es.upm.sos.biblioteca.exceptions.PrestamoAlreadyExistException;
 import es.upm.sos.biblioteca.exceptions.PrestamoNotFoundException;
 import es.upm.sos.biblioteca.exceptions.UsuarioExistsException;
 import es.upm.sos.biblioteca.exceptions.UsuarioHasPrestamosException;
@@ -131,6 +132,12 @@ public class UsuariosController {
     @GetMapping("/{usuarioId}/libros/{libroId}")
     public ResponseEntity<Prestamo> getUsuarioLibroPrestamo(@PathVariable Integer usuarioId,
             @PathVariable Integer libroId) {
+        if (!usuarioService.existeUsuarioPorId(usuarioId)) {
+            throw new UsuarioNotFoundException(usuarioId);
+        } else if (!libroService.existeLibroPorId(libroId)) {
+            throw new LibroNotFoundException(libroId);
+        }
+
         PrestamoId prestamoId = new PrestamoId(usuarioId, libroId);
         Prestamo prestamo = prestamoService.buscarPorId(prestamoId)
                 .orElseThrow(() -> new PrestamoNotFoundException(usuarioId, libroId));
@@ -148,6 +155,9 @@ public class UsuariosController {
         Libro libro = libroService.buscarPorId(nuevoPrestamo.getLibroId())
                 .orElseThrow(() -> new LibroNotFoundException(
                         nuevoPrestamo.getLibroId()));
+        if (prestamoService.existePrestamoPorId(nuevoPrestamo)) {
+            throw new PrestamoAlreadyExistException(nuevoPrestamo);
+        }
         prestamoService.prestarLibroAUsuario(nuevoPrestamo, libro, usuario);
         return ResponseEntity.created(linkTo(UsuariosController.class).slash(id).slash("libros")
                 .slash(libro.getLibroId()).toUri()).build();
