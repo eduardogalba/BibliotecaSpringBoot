@@ -279,8 +279,8 @@ public class UsuariosController {
             return null;
         }
 
-        DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        DateTimeFormatter formatterWithoutTime = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatterWithoutTime = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         DateTimeFormatter isoFormatter = DateTimeFormatter.ISO_DATE_TIME;
 
         try {
@@ -302,7 +302,7 @@ public class UsuariosController {
         }
 
         throw new IllegalArgumentException(
-                "El formato de la fecha debe ser uno de los siguientes: dd/MM/yyyy, dd/MM/yyyy HH:mm:ss, o ISO_DATE_TIME (yyyy-MM-dd'T'HH:mm:ss)");
+                "El formato de la fecha debe ser uno de los siguientes: dd-MM-yyyy, dd-MM-yyyy HH:mm:ss, o ISO_DATE_TIME (yyyy-MM-dd'T'HH:mm:ss)");
     }
 
 }
