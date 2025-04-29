@@ -18,4 +18,10 @@ public class PrestamoNotFoundAdvice {
     ErrorMessage prestamoOutOfDateHandler(PrestamoOutOfDateException ex) {
         return new ErrorMessage(ex.getMessage());
     }
+
+    @ExceptionHandler(PrestamoAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    ErrorMessage prestamoAlreadyExistHandler(PrestamoAlreadyExistException ex) {
+        return new ErrorMessage(ex.getMessage());
+    }
 }
